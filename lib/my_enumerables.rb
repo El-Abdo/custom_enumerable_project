@@ -10,10 +10,22 @@ module Enumerable
     end
     self
   end
+  # my_select a clone of the array method Array#select
+  def my_select
+    return to_enum(:my_select) unless block_given?
+
+    result = []
+    self.my_each do |el|
+      if yield el
+        result << el
+      end
+    end
+    result
+  end
 end
 
 class Array
-  # my_each a clone of the enumerable array method (each)
+  # my_each a clone of the enumerable array method Array#each
   def my_each
     if block_given?
       for el in self
