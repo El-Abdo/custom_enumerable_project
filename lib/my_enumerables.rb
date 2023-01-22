@@ -22,6 +22,19 @@ module Enumerable
     end
     result
   end
+  # a clone of Array#all? that checks the array elements against some block
+  def my_all?
+    return to_enum(:my_all?) unless block_given?
+    return true if self.empty?
+
+    res = true
+    self.my_each do |el|
+      unless yield el
+        res = false
+      end
+    end
+    res
+  end
 end
 
 class Array
