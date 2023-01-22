@@ -22,7 +22,7 @@ module Enumerable
     end
     result
   end
-  # a clone of Array#all? that checks the array elements against some block
+  # a clone of Array#all? that checks if all elements are true against some block (or array is empty)
   def my_all?
     return to_enum(:my_all?) unless block_given?
     return true if self.empty?
@@ -31,6 +31,18 @@ module Enumerable
     self.my_each do |el|
       unless yield el
         result = false
+      end
+    end
+    result
+  end
+  # a clone of Array#any? that is true when any element is true to the block (or non empty array)
+  def my_any?
+    return true unless block_given?
+
+    result = false
+    self.my_each do |el|
+      if yield el
+        result = true
       end
     end
     result
