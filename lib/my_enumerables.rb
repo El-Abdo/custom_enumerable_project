@@ -27,13 +27,13 @@ module Enumerable
     return to_enum(:my_all?) unless block_given?
     return true if self.empty?
 
-    res = true
+    result = true
     self.my_each do |el|
       unless yield el
-        res = false
+        result = false
       end
     end
-    res
+    result
   end
 end
 
